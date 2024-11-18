@@ -365,7 +365,13 @@ void main(int argc, char* argv[]) {
 	coff_object coff;
 	PCHAR arguments = NULL;
 	size_t arg_size = 0;
+	#ifdef DEBUG
 
+	if(BeaconIsAdmin()){
+		DEBUG_PRINT("Current User is Admin.\n");
+	}
+
+	#endif
 	if (argc < 2) {
 		printf("not enough args...\nUsage: %s [path_to_obj_file] <opt: arguments>", argv[0]);
 		return;

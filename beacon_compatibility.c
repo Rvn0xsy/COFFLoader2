@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdarg.h>
-#ifdef _WIN32
+
 #include <windows.h>
 
 #include "beacon_compatibility.h"
@@ -272,10 +272,23 @@ void BeaconRevertToken(void) {
 
 BOOL BeaconIsAdmin(void) {
     /* Leaving this to be implemented by people needing it */
-#ifdef DEBUG
-    printf("BeaconIsAdmin Called\n");
-#endif
-    return FALSE;
+    SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+    PSID AdministratorsGroup;
+
+    BOOL state = AllocateAndInitializeSid(
+        &NtAuthority,
+        2,
+        SECURITY_BUILTIN_DOMAIN_RID,
+        DOMAIN_ALIAS_RID_ADMINS,
+        0, 0, 0, 0, 0, 0,
+        &AdministratorsGroup);
+
+    if (state)
+    {
+        CheckTokenMembership(NULL, AdministratorsGroup, &state);
+        FreeSid(AdministratorsGroup);
+    }
+    return  state == TRUE ;
 }
 
 /* Injection/spawning related stuffs
@@ -347,4 +360,4 @@ char* BeaconGetOutputData(int* outsize) {
     return outdata;
 }
 
-#endif
+// #endif

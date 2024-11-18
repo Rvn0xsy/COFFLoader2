@@ -3,6 +3,9 @@
 This repo contains the source code of a Common Object File Format (COFF) loader, which is a rewrite of the research and implementation done by Kevin Haubris [@Kev169](https://twitter.com/kev169) on the [TrustedSec](https://www.trustedsec.com) GitHub repo [here](https://github.com/trustedsec/COFFLoader). Kevin also wrote an article about [building your own COFF loader](https://www.trustedsec.com/blog/coffloader-building-your-own-in-memory-loader-or-how-to-run-bofs/)
 
 Kevin did an excellent job in figuring out the relocations and implementing the beacon compatibility layer. This repo takes it a bit further in making the code prettier (beauty is in the eyes of the beholder anyway) and more readable. This repo includes more comments, extracted COFF-related code into re-usable functions, usage of MSVC-compliant functions, and fix issues with MSVC-compiled BOFs. Also, while the code is initially inspired by Kevin's work, the approach to the implementation of the relocations and memory allocation is different.
+## Changelog
+
+- [x]  `BeaconIsAdmin` 2024/11/18 + @Rvn0xsy
 
 ### Why?
 
